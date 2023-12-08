@@ -10,6 +10,10 @@ with zipfile.ZipFile('takeout.zip', 'r') as zip_ref:
 
 main_path = "unzipped/Takeout/keep"
 
-mai_dir_files = os.listdir(main_path)
+main_dir_files = os.listdir(main_path)
+
+for file in main_dir_files:
+    if file.endswith('.json'):
+        print(file)
 
 
