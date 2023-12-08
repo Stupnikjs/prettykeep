@@ -5,4 +5,10 @@ app = Flask(__name__)
 
 from router import *
 
-app.run(host="0.0.0.0", port=os.environ['PORT'])
+port = "5000"
+
+if port == "":
+    port = os.environ.get('PORT')
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", debug=True, port=port)

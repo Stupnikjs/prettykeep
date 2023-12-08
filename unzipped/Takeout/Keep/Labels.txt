@@ -1,0 +1,31 @@
+Cryptographie
+Spring
+PowerShell
+Cloud SQL
+Java
+Tensorflow
+SqlAlchemy
+Redis
+Math
+Python
+Git
+Neural Network
+Docker
+Node js
+Machine Learning
+MongoDB
+Kubernetes
+Css
+Golang
+Pandas
+Javascript
+CloudRun
+Scikit-learn
+Flask
+Google Cloud
+Bash
+RegExp
+Algèbre Linéaire
+PSQL
+NumPy
+Matplotlib

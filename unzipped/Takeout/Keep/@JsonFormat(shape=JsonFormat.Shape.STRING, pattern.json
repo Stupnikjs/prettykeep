@@ -1,0 +1,1 @@
+{"color":"DEFAULT","isTrashed":false,"isPinned":false,"isArchived":false,"textContent":"","title":"@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = \"dd-MM-yyyy\")","userEditedTimestampUsec":1683871695405000,"createdTimestampUsec":1683871693130000,"labels":[{"name":"Spring"}]}

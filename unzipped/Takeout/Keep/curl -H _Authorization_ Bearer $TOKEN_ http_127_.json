@@ -1,0 +1,1 @@
+{"color":"DEFAULT","isTrashed":false,"isPinned":false,"isArchived":false,"textContent":"","title":"curl -H \"Authorization: Bearer $TOKEN\" http://127.0.0.1:10080/secure","userEditedTimestampUsec":1678194791353000,"createdTimestampUsec":1678194791353000,"labels":[{"name":"Bash"}]}

@@ -1,0 +1,1 @@
+{"color":"DEFAULT","isTrashed":false,"isPinned":false,"isArchived":false,"textContent":"","title":"kubectl exec monolith --stdin --tty -c monolith -- /bin/sh","userEditedTimestampUsec":1678194930934000,"createdTimestampUsec":1678194930934000,"labels":[{"name":"Kubernetes"}]}
