@@ -2,7 +2,7 @@ import zipfile
 import os
 import shutil 
 import json
-
+import pathlib
 '''
 with zipfile.ZipFile('takeout.zip', 'r') as zip_ref:
     zip_ref.extractall('unzipped')
@@ -22,5 +22,17 @@ print(len(json_files))
 
 
 # open a json file 
+relevant = []
+for json_file_path in json_files:
+    with open(os.path.join(main_path, json_file_path)) as json_file:
+        try :
+            data = json.load(json_file)
+            obj = {}
+            obj['text'] = data['textContent']
+            obj['title'] = data['title']
+            relevant.append(obj)
+        except Exception as e:
+            print(e)
 
 
+print(relevant)
