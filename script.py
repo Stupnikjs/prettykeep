@@ -3,6 +3,7 @@ import os
 import shutil 
 import json
 import pathlib
+
 '''
 with zipfile.ZipFile('takeout.zip', 'r') as zip_ref:
     zip_ref.extractall('unzipped')
@@ -35,5 +36,3 @@ for json_file_path in json_files:
         except Exception as e:
             print(e)
 
-
-print(relevant)

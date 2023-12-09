@@ -1,5 +1,7 @@
 from server import app 
+from script import relevant
 from flask import render_template
+
 
 @app.route('/')
 def index():
@@ -8,5 +10,5 @@ def index():
 
 @app.route('/test')
 def test():
-    return render_template('fiche.html', data={"hello":"world"})
+    return render_template('fiche.html', data=relevant)
 

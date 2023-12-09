@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
 </head>
 <body>
-    <p> Ma fiche </p>
-    <div>{{data['hello']}}</div>
+    <h1> Ma fiche </h1>
+    <div class="data-card">
+        <h2>{{data[0]['title']}}</h2>
+        <div>{{ data[0]['text'] }}</div>
+        <div>
+             {% for item in data[0]["labels"] %}
+                <p>{{item['name']}}</p>
+             {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
