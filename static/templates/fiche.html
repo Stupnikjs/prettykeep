@@ -9,14 +9,19 @@
 </head>
 <body>
     <h1> Ma fiche </h1>
-    <div class="data-card">
-        <h2>{{data[0]['title']}}</h2>
-        <div>{{ data[0]['text'] }}</div>
-        <div>
-             {% for item in data[0]["labels"] %}
-                <p>{{item['name']}}</p>
-             {% endfor %}
+    <div class="data-container">
+        {% for item in data %}
+        <div class="data-card">
+            <h2>{{item['title']}}</h2>
+            <div class="text">{{ item['text'] }}</div>
+            <div>
+                   {% for lab in item["labels"] %}
+                    <p>{{lab['name']}}</p>
+                  {% endfor %}  
+            </div>
         </div>
+       
+        {% endfor %}
     </div>
 </body>
 </html>

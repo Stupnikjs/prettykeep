@@ -1,4 +1,11 @@
-.data-card{
-    color:red; 
-    border: 2px solid red
+
+.data-container{
+
+    flex-direction: column;
+    gap: 5%;
 }
+.data-card{
+    background-color: lightblue;
+    border: 2px solid rgb(157, 107, 107)
+}
+
