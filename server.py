@@ -1,9 +1,10 @@
 import os 
-from flask import Flask 
+from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="static/templates")
 
 from router import *
+
 
 port = "5000"
 
