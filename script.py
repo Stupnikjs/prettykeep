@@ -31,7 +31,7 @@ for json_file_path in json_files:
             obj = {}
             obj['text'] = data['textContent']
             obj['title'] = data['title']
-            obj['labels'] = data['labels']
+            obj['labels'] = data['labels'][0]['name']
             relevant.append(obj)
         except Exception as e:
             print(e)
