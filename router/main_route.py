@@ -3,6 +3,7 @@ from script import relevant
 from flask import render_template, request
 
 def get_labels(dict):
+    # loop over labels and check prop "name" and return a list of boolean, if one is true any() return true
     return dict['labels'][0]['name']
 
 '''
@@ -29,7 +30,7 @@ def sortby():
     param = request.get_json()
     print(param)
     print(relevant[0])
-    return relevant[0]
+    return get_labels(relevant[0])
     '''
        if param['search'] not in all_labels:
         return 'error'
