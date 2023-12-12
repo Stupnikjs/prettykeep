@@ -10,20 +10,15 @@
 <body>
     <h1> Ma fiche </h1>
     <div class="data-container">
-        {% for item in data %}
         <div class="data-card">
-            <h2>{{item['title']}}</h2>
+            <h2>{{fiche['title']}}</h2>
             <div class="text">
-                <textarea>{{ item['text'] }}</textarea>
+                <textarea>{{ fiche['text'] }}</textarea>
             </div>
             <div>
-                   {% for lab in item["labels"] %}
-                    <p class="lab">{{lab['name']}}</p>
-                  {% endfor %}  
+                    <p class="lab">{{fiche['labels']}}</p>
             </div>
         </div>
-       
-        {% endfor %}
     </div>
 </body>
 </html>

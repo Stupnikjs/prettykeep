@@ -20,7 +20,7 @@ class Fiche(Base):
     def to_dict(self):
         return {
         'title':self.title, 
-        'text' : self.text_content,
+        'text' : self.text,
         'created' : self.created,
         'updated': self.updated,
         'labels': self.labels

@@ -30,6 +30,8 @@ Base.metadata.create_all(engine, checkfirst=True)
 # Base.metadata.drop_all(engine)
 today = datetime.now().strftime("%d-%m-%Y %H:%M")
 
+'''
+A metre dans une init db 
 for fiche in relevant:
     fiche['created'] = today
     fiche['updated'] = None 
@@ -46,6 +48,8 @@ for fiche in relevant:
             )
         session.add(newfiche)
         session.commit()
+'''
+
     
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=True, port=port)

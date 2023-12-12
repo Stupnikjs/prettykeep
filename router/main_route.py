@@ -1,6 +1,8 @@
-from server import app 
+from server import app, engine
 from script import relevant
 from flask import render_template, request
+from sqlalchemy.orm import Session
+from model import Fiche
 
 def get_labels(dict):
     # loop over labels and check prop "name" and return a list of boolean, if one is true any() return true
@@ -23,7 +25,11 @@ def index():
 
 @app.route('/fiche/<int:id>')
 def test(id):
+    print(id)
     # with sql conn
+    with Session(engine) as session: 
+        fiche = session.get(Fiche, id)
+        print(fiche)
     # sql request 
     # fiche 
     return render_template('fiche.html', data=fiche)
