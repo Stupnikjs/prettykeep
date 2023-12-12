@@ -21,9 +21,12 @@ def index():
     return 'Hello'
 
 
-@app.route('/test')
-def test():
-    return render_template('fiche.html', data=relevant)
+@app.route('/fiche/<int:id>')
+def test(id):
+    # with sql conn
+    # sql request 
+    # fiche 
+    return render_template('fiche.html', data=fiche)
 
 @app.route('/sortby/', methods=['POST'])
 def sortby():
