@@ -24,3 +24,6 @@ class fiche(Base):
       'updated': self.updated
       
 }
+
+    def __str__(self):
+        return self.to_dict()
