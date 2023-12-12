@@ -13,4 +13,14 @@ class fiche(Base):
     id = Column(Integer,primary_key=True)
     title = Column(String(40))
     text_content = Column(String(40))
-    created = 
+    created = Column(String(20))
+    updated = Column(String(20))
+
+   def to_dict():
+     return {
+     'title':self.title, 
+     'text_content' : self.text_content,
+     'created' : self.created,
+      'updated': self.updated
+      
+}
