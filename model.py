@@ -1,13 +1,11 @@
 
-from sqlalchemy import declarative_base
-from 
 
-class Base():
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
 
 
 class fiche(Base):
-     def __init__(self):
-           title
-           text_content
-           label
+     __table
            
