@@ -28,11 +28,11 @@ def test(id):
     print(id)
     # with sql conn
     with Session(engine) as session: 
-        fiche = session.get(Fiche, id)
-        print(fiche)
+        fiche = session.query(Fiche).get(id)
+        
     # sql request 
     # fiche 
-    return render_template('fiche.html', data=fiche)
+    return render_template('fiche.html', fiche=fiche.to_dict())
 
 @app.route('/sortby/', methods=['POST'])
 def sortby():
