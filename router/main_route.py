@@ -1,5 +1,4 @@
 from server import app, engine
-from script import relevant
 from flask import render_template, request
 from sqlalchemy.orm import Session
 from model import Fiche
@@ -35,7 +34,7 @@ def update_fiche(id):
    
 
 # tous les labels 
-@app.route('/wihtlabel/<str:label>')
+@app.route('/wihtlabel/<string:label>')
 def get_fiche_with_label(label):
     # with sql conn
     with Session(engine) as session: 

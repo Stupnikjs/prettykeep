@@ -1,3 +1,4 @@
+'''
 import zipfile
 import os
 import json
@@ -63,3 +64,5 @@ for json_file_path in json_files:
             relevant.append(obj)
         except Exception as e:
             print(e)
+'''
+

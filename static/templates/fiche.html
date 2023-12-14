@@ -8,18 +8,17 @@
     <script src="{{ url_for('static', filename='javascript/main.js') }}"></script>
 </head>
 <body>
-    <h1> Ma fiche </h1>
-    <div class="data-container">
         <div class="data-card">
             <div>
                 <button>Update</button>    
             </div>
             <h2>{{fiche['title']}}</h2>
-            <textarea  class="text">{{ fiche['text'] }}</>
+            <div class="textarea_container">
+                <textarea  class="text">{{ fiche['text'] }}</>
+            </div>
         <div>
             <p class="lab">{{fiche['labels']}}</p>
         </div>
         </div>
-    </div>
 </body>
 </html>
