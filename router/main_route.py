@@ -4,24 +4,9 @@ from flask import render_template, request
 from sqlalchemy.orm import Session
 from model import Fiche
 
-def get_labels(dict):
-    # loop over labels and check prop "name" and return a list of boolean, if one is true any() return true
-    return dict['labels'][0]['name']
-
-'''
-def has_labels(x, dict):
-    return x == get_labels(dict)
-
-all_labels = map(get_labels,relevant)
-
-@app.route('/')
-def index():
-    return 'Hello'
-
-'''
 
 
-
+# afficher la fiche 
 @app.route('/fiche/<int:id>')
 def test(id):
     print(id)
@@ -34,31 +19,31 @@ def test(id):
     return render_template('fiche.html', fiche=fiche.to_dict())
 
 
+
+# mettre a jour la fiche 
 @app.route('/updatefiche/<int:id>', methods=['POST'])
 def update_fiche(id):
     # with sql conn
+    updated_fiche = request.get_json()['fiche']
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
+        fiche = Fiche(
+
+        )
         return fiche.to_dict()
     # sql request 
    
 
-
-@app.route('/sortby/', methods=['POST'])
-def sortby():
-    param = request.get_json()
-    print(param)
-    print(relevant[0])
-    return get_labels(relevant[0])
-    '''
-       if param['search'] not in all_labels:
-        return 'error'
-    else: 
-        sorted = filter( lambda x: has_labels(x, relevant), relevant)
-    return sorted
-    '''
- 
- # route label 
+# tous les labels 
+@app.route('/wihtlabel/<str:label>')
+def get_fiche_with_label(label):
+    # with sql conn
+    with Session(engine) as session: 
+        fiches = session.query(Fiche).filter_by(label=label)
+        return render_template("bylabel.html", fiches=fiches)
+    
 
  
+
+
 
