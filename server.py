@@ -1,13 +1,13 @@
 import os 
 from datetime import datetime 
-from flask import Flask
+from app import create_app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from script import relevant
+# from script import relevant
 from model import Fiche
 
 
-app = Flask(__name__, template_folder="static/templates")
+app = create_app()
 
 from router import *
 from model import Base 

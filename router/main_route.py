@@ -39,13 +39,9 @@ def update_fiche(id):
     # with sql conn
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
+        return fiche.to_dict()
     # sql request 
-    # fiche 
-    try: 
-
-    except:
-        
-    return 
+   
 
 
 @app.route('/sortby/', methods=['POST'])

@@ -46,3 +46,20 @@ def extract_gkeep(arg):
                 print(e)
 
 extract_gkeep(arg.path)
+
+
+main_path = 'unzipped/Takeout'
+json_files = os.listdir(main_path)
+
+relevant = []
+for json_file_path in json_files:
+    with open(os.path.join(main_path, json_file_path)) as json_file:
+        try :
+            data = json.load(json_file)
+            obj = {}
+            obj['text'] = data['textContent']
+            obj['title'] = data['title']
+            obj['labels'] = data['labels'][0]['name']
+            relevant.append(obj)
+        except Exception as e:
+            print(e)
