@@ -48,7 +48,7 @@ def get_fiche_with_label(label):
 
  
 
-# afficher la fiche 
+# supprimer la fiche 
 @app.route('/delete_fiche/<int:id>')
 def delete_fiche(id):
     # with sql conn
