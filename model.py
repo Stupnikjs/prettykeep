@@ -16,6 +16,8 @@ class Fiche(Base):
     created = Column(String(20))
     updated = Column(String(20))
     labels = Column(String(30))
+    complete_start = Column(Integer)
+    complete_end = Column(Integer)
 
     def to_dict(self):
         return {
@@ -23,7 +25,10 @@ class Fiche(Base):
         'text' : self.text,
         'created' : self.created,
         'updated': self.updated,
-        'labels': self.labels
+        'labels': self.labels,
+        'complete_start': self.complete_start,
+        'complete_end': self.complete_end
+
         }
 
     def __str__(self):
