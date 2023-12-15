@@ -27,7 +27,11 @@ def update_fiche(id):
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
         fiche = Fiche(
-
+         title=updated_fiche['title'],
+         text=updated_fiche['text'],
+         labels=updated_fiche['labels'],
+         created=updated_fiche['created']
+         updated=updated_fiche['updated'], 
         )
         return fiche.to_dict()
     # sql request 
