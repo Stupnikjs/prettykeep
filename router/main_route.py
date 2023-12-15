@@ -24,6 +24,8 @@ def test(id):
 def update_fiche(id):
     # with sql conn
     updated_fiche = request.get_json()['fiche']
+    # gérer erreur dans le json 
+    
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
         fiche = Fiche(
@@ -32,6 +34,7 @@ def update_fiche(id):
          labels=updated_fiche['labels'],
          created=updated_fiche['created']
          updated=updated_fiche['updated'], 
+         #complete=updated_fiche['complete']
         )
         return fiche.to_dict()
     # sql request 
