@@ -48,5 +48,15 @@ def get_fiche_with_label(label):
 
  
 
+# afficher la fiche 
+@app.route('/delete_fiche/<int:id>')
+def delete_fiche(id):
+    # with sql conn
+    with Session(engine) as session: 
+        # fiche = session.query(Fiche).get(id) delete 
+        
+    # sql request 
+    # fiche 
+    return render_template('fiche.html', fiche=fiche.to_dict())
 
 
