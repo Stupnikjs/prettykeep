@@ -30,6 +30,8 @@ Base.metadata.create_all(engine, checkfirst=True)
 # Base.metadata.drop_all(engine)
 today = datetime.now().strftime("%d-%m-%Y %H:%M")
 
+# middleware authentification
+
 '''
 A metre dans une init db 
 for fiche in relevant:
