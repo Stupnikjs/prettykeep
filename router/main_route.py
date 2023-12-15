@@ -34,7 +34,8 @@ def update_fiche(id):
          labels=updated_fiche['labels'],
          created=updated_fiche['created']
          updated=updated_fiche['updated'], 
-         #complete=updated_fiche['complete']
+ complete_start=updated_fiche['complete_start'],
+complete_end=updated_fiche['complete_end
         )
         return fiche.to_dict()
     # sql request 
