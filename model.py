@@ -28,7 +28,6 @@ class Fiche(Base):
         'labels': self.labels,
         'complete_start': self.complete_start,
         'complete_end': self.complete_end
-
         }
 
     def __str__(self):

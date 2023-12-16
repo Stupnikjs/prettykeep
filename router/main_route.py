@@ -8,14 +8,10 @@ from model import Fiche
 # afficher la fiche 
 @app.route('/fiche/<int:id>')
 def test(id):
-    print(id)
     # with sql conn
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
-        
-    # sql request 
-    # fiche 
-    return render_template('fiche.html', fiche=fiche.to_dict())
+    return render_template('fiche.html', fiche=fiche)
 
 
 
@@ -32,33 +28,39 @@ def update_fiche(id):
          title=updated_fiche['title'],
          text=updated_fiche['text'],
          labels=updated_fiche['labels'],
-         created=updated_fiche['created']
+         created=updated_fiche['created'],
          updated=updated_fiche['updated'], 
- complete_start=updated_fiche['complete_start'],
-complete_end=updated_fiche['complete_end
+         complete_start=updated_fiche['complete_start'],
+         complete_end=updated_fiche['complete_end']
         )
         return fiche.to_dict()
     # sql request 
    
 
 # tous les labels 
-@app.route('/wihtlabel/<string:label>')
+@app.route('/withlabel/<string:label>')
 def get_fiche_with_label(label):
     # with sql conn
     with Session(engine) as session: 
-        fiches = session.query(Fiche).filter_by(label=label)
-        return render_template("bylabel.html", fiches=fiches)
+        fiches = session.query(Fiche).filter_by(labels=label)
+        return_fiches = []
+        for fiche in fiches:
+            
+            return_fiches.append(fiche.to_dict())
+        print(return_fiches)
+        return render_template("bylabel.html", fiches=return_fiches)
     
 
  
 
 # supprimer la fiche 
-@app.route('/delete_fiche/<int:id>')
+@app.route('/deletefiche/<int:id>')
 def delete_fiche(id):
     # with sql conn
     with Session(engine) as session: 
-        # fiche = session.query(Fiche).get(id) delete 
-        
+        fiche = session.query(Fiche).get(id)
+        session.delete(fiche)
+        session.commit()
     # sql request 
     # fiche 
     return render_template('fiche.html', fiche=fiche.to_dict())

@@ -1,7 +1,32 @@
-textarea{
-    width: 100%;
-    height: 70%;
-    margin-left: 2rem;
+@font-face {
+    font-family: 'voltaire'; /* Choose a name for your font */
+    src: url('../fonts/Voltaire-Regular.ttf') format('woff');
+    /* You can include additional formats as needed */
+  }
+
+
+
+.data-card{
+    background: linear-gradient(to bottom, #b7af92, #f1e8e2);
+    border: 2px solid rgb(157, 107, 107); 
+    height: 80vh;
+    flex: 1;
+    width: 80%;
+    margin: auto;
+    font-family: "voltaire";
+    display: flex;
+    flex-direction: column;
+}
+
+.button-div{
+    width: 35%;
+    order: 4;
+    margin: 2% auto;
+}
+.button-div button{
+    font-family: "voltaire";
+    padding: 1rem;
+    font-size: 1.5rem;
 }
 
 .textarea_container{
@@ -10,18 +35,24 @@ textarea{
     height: 60vh;
 }
 
-.data-card{
-    background-color: lightblue;
-    border: 2px solid rgb(157, 107, 107); 
-    height: 80vh;
-    flex: 1;
+textarea{
+    width: 100%;
+    height: 70%;
+    margin-left: 2rem;
+    font-family: "voltaire";
+    font-size:2rem;
 }
 
+
+
+
+
 .data-card h2 {
-    margin-left: 4rem;
-    background-color: beige;
+    background-color: rgb(215, 215, 180);
     width: 20%;
-    border-radius: 5rem ;
+    border-radius: 3rem ;
+    padding: 1rem; 
+    margin: auto;
 }
 
 .text{

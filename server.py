@@ -4,7 +4,7 @@ from app import create_app
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 # from script import relevant
-from model import Fiche
+
 
 
 app = create_app()
@@ -32,25 +32,6 @@ today = datetime.now().strftime("%d-%m-%Y %H:%M")
 
 # middleware authentification
 
-'''
-A metre dans une init db 
-for fiche in relevant:
-    fiche['created'] = today
-    fiche['updated'] = None 
-    print(fiche)
-    with Session(engine) as session:
-        fiche['created'] = today
-        fiche['updated'] = None
-        newfiche=Fiche(
-            title=fiche['title'],
-            text=fiche['text'],
-            created=fiche['created'],
-            updated=fiche['updated'],
-            labels=fiche['labels']
-            )
-        session.add(newfiche)
-        session.commit()
-'''
 
     
 if __name__ == '__main__':

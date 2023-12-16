@@ -9,12 +9,14 @@
 </head>
 <body>
         <div class="data-card">
-            <div>
-                <button>Update</button>    
+            <div class="button-div">
+                <button>Update</button> 
+                <button>Add Completion</button> 
+                <button>Delete</button>  
             </div>
             <h2>{{fiche['title']}}</h2>
             <div class="textarea_container">
-                <textarea  class="text">{{ fiche['text'] }}</>
+                <textarea  class="text">{{ fiche['text'] }}</textarea>
             </div>
         <div>
             <p class="lab">{{fiche['labels']}}</p>
