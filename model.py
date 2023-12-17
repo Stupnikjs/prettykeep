@@ -21,6 +21,7 @@ class Fiche(Base):
 
     def to_dict(self):
         return {
+        'id':self.id,
         'title':self.title, 
         'text' : self.text,
         'created' : self.created,

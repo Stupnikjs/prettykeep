@@ -41,11 +41,11 @@ def update_fiche(id):
 @app.route('/withlabel/<string:label>')
 def get_fiche_with_label(label):
     # with sql conn
+    label = label[0].upper() + label[1:]
     with Session(engine) as session: 
         fiches = session.query(Fiche).filter_by(labels=label)
         return_fiches = []
-        for fiche in fiches:
-            
+        for fiche in fiches:   
             return_fiches.append(fiche.to_dict())
         print(return_fiches)
         return render_template("bylabel.html", fiches=return_fiches)

@@ -5,7 +5,8 @@ import json
 import argparse
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session 
-from model import Fiche
+from model import Fiche, Base
+import sys
 
 parser = argparse.ArgumentParser()
 
@@ -13,9 +14,21 @@ parser.add_argument('-p', '--path', required=True, help='Specify the path')
 
 arg = parser.parse_args()
 
-uri= "postgresql://qedivgso:GlAGhCxeJjsTKv_MoVz35OAjyxCXTeS9@tyke.db.elephantsql.com/qedivgso"
+uri= "postgresql://fxplwekm:pgZ9xU385QNotPsxUjAKq2MF72C8puRD@kandula.db.elephantsql.com/fxplwekm"
+uri2 = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
 
-engine = create_engine(uri)
+engine = create_engine(uri2, pool_size=4, max_overflow=2)
+
+
+
+
+if arg.path == "reset":
+    Base.metadata.drop_all(engine)
+    sys.exit()
+
+else :
+    Base.metadata.create_all(engine, checkfirst=True)
+
 
 def is_json(file):
     return file.endswith('.json')
@@ -49,7 +62,7 @@ def extract_gkeep(arg):
                         session.add(fiche)
                         session.commit()
                 except Exception as e: 
-                    print(e)
+                    print(f'the exception is {e}')
 
 extract_gkeep(arg.path)
 

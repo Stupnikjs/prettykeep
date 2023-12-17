@@ -53,6 +53,7 @@ textarea{
     border-radius: 3rem ;
     padding: 1rem; 
     margin: auto;
+    text-align: center;
 }
 
 .text{
@@ -61,8 +62,31 @@ textarea{
     background-color: azure;
     margin: auto;
 }
-.lab{
+.fiche_link{
     background-color: aliceblue;
     width: fit-content;
     padding:1rem;
+    text-decoration: none;
+    color: black;
+    margin-left: 2rem;
+    border: 2px solid blue;
+    font-size: 2rem;
+}
+
+
+.title_link{
+    padding: 1rem;
+    background-color: aliceblue;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+}
+
+
+.bylabels_div{
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "voltaire";
+    min-width: 4rem;
+    
 }
