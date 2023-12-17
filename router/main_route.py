@@ -19,8 +19,10 @@ def test(id):
 @app.route('/updatefiche/<int:id>', methods=['POST'])
 def update_fiche(id):
     # with sql conn
+    today = datetime.now().strftime("%d-%m-%Y %H:%M")
     updated_fiche = request.get_json()['fiche']
     # gérer erreur dans le json 
+    updated_fiche['updated'] = today
     
     with Session(engine) as session: 
         fiche = session.query(Fiche).get(id)
