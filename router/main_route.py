@@ -1,18 +1,19 @@
 import base64
 from server import app, engine
 from flask import render_template, request
-from sqlalchemy.orm import Session
-from model import Fiche
+from sqlalchemy.orm import Session,joinedload
+from orm import Fiche
+from datetime import datetime
 
 
 
 # afficher la fiche 
 @app.route('/fiche/<int:id>')
 def test(id):
-    # with sql conn
-    with Session(engine) as session: 
+    with Session(engine) as session:
         fiche = session.query(Fiche).get(id)
-    return render_template('fiche.html', fiche=fiche)
+        print(fiche.to_dict())
+        return render_template('fiche.html', fiche=fiche)
 
 
 

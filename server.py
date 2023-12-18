@@ -10,7 +10,7 @@ from sqlalchemy import create_engine
 app = create_app()
 
 from router import *
-from model import Base 
+from orm import Base 
 
 
 
@@ -23,10 +23,9 @@ if port == "":
 
 if 'DB_URI' in os.environ: 
     uri=os.environ['DB_URI']
+else: 
+    uri='postgresql://mavkwomw:AcfRavZm6hKU42I0rDRzYcruMuFtI8D6@horton.db.elephantsql.com/mavkwomw'
 
-
-# uri2 = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
-# uri= "postgresql://fxplwekm:pgZ9xU385QNotPsxUjAKq2MF72C8puRD@kandula.db.elephantsql.com/fxplwekm" 
 
 
 engine = create_engine(uri, pool_size=4, max_overflow=2)

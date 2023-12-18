@@ -5,7 +5,7 @@ import json
 import argparse
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import Session 
-from model import Fiche, Base
+from orm import Fiche, Base,Label
 import sys
 
 parser = argparse.ArgumentParser()
@@ -47,18 +47,31 @@ def extract_gkeep(arg):
     for json_file_path in json_files:
         with open(os.path.join( os.getcwd(), "unzipped","takeout", "keep" , json_file_path)) as json_file:
                 try:
-                    data = json.load(json_file)
-                    fiche = Fiche(
-                        text = data['textContent'],
-                        title = data['title'],
-                        labels = data['labels'][0]['name'],
-                        created = today,
-                        updated = None,
-                        complete_start = 0,
-                        complete_end = 0
-                    )
-                
+                    data = json.load(json_file)  
+                    labels = []
+                    for dict in data['labels']:
+                        print(dict['name'])
+                        labels.append(dict['name'])
                     with Session(engine) as session:
+                        fiche = Fiche(
+                            text = data['textContent'],
+                            title = data['title'],
+                            created = today,
+                            updated = None,
+                            complete_start = 0,
+                            complete_end = 0
+                        )
+                        
+                        for label in labels:
+                                label = session.query(Label).filter(Label.name == label).first()
+                                if label == None: 
+                                    label_instance =  Label(
+                                        name = label,
+                                        hot = False
+                                    )
+                                else: 
+                                    label_instance = label
+                                fiche.labels.append(label_instance)
                         session.add(fiche)
                         session.commit()
                 except Exception as e: 
@@ -70,6 +83,12 @@ with engine.connect() as conn:
     result = conn.execute(text('SELECT * FROM fiches')).fetchall()
     for row in result:
         print(row)
+    result = conn.execute(text('SELECT * FROM association')).fetchall()
+    for row in result:
+        print(row)
+
+
+
 
 
 
