@@ -1,3 +1,4 @@
+import base64
 from server import app, engine
 from flask import render_template, request
 from sqlalchemy.orm import Session
@@ -43,9 +44,10 @@ def update_fiche(id):
 @app.route('/withlabel/<string:label>')
 def get_fiche_with_label(label):
     # with sql conn
-    label = label[0].upper() + label[1:]
+    decoded_label = base64.urlsafe_b64decode(label)
+    decoded_label = decoded_label[0].upper() + decoded_label[1:]
     with Session(engine) as session: 
-        fiches = session.query(Fiche).filter_by(labels=label)
+        fiches = session.query(Fiche).filter_by(labels=decoded_label)
         return_fiches = []
         for fiche in fiches:   
             return_fiches.append(fiche.to_dict())
