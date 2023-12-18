@@ -4,9 +4,7 @@ import os
 import json
 import argparse
 from sqlalchemy import create_engine, text
-from sqlalchemy.orm import Session 
-from orm import Fiche, Base,Label
-import sys
+from query import insert_new_fiche, select_label_with_name, create_label_with_name, insert_link
 
 parser = argparse.ArgumentParser()
 
@@ -19,15 +17,6 @@ uri2 = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephan
 
 engine = create_engine(uri2, pool_size=4, max_overflow=2)
 
-
-
-
-if arg.path == "reset":
-    Base.metadata.drop_all(engine)
-    sys.exit()
-
-else :
-    Base.metadata.create_all(engine, checkfirst=True)
 
 
 def is_json(file):
@@ -52,28 +41,25 @@ def extract_gkeep(arg):
                     for dict in data['labels']:
                         print(dict['name'])
                         labels.append(dict['name'])
-                    with Session(engine) as session:
-                        fiche = Fiche(
-                            text = data['textContent'],
-                            title = data['title'],
-                            created = today,
-                            updated = None,
-                            complete_start = 0,
-                            complete_end = 0
+                    with engine.connect() as conn:
+
+                        res = conn.execute(insert_new_fiche, 
+                            (data['textContent'],
+                            data['title'],
+                            today,
+                            None,
+                            0,
+                            0)
                         )
+                        fiche_id = res.scalar()
                         
                         for label in labels:
-                                label = session.query(Label).filter(Label.name == label).first()
-                                if label == None: 
-                                    label_instance =  Label(
-                                        name = label,
-                                        hot = False
-                                    )
-                                else: 
-                                    label_instance = label
-                                fiche.labels.append(label_instance)
-                        session.add(fiche)
-                        session.commit()
+                                label = conn.execute(select_label_with_name, label) 
+                                if label == None:
+                                    res_query  = conn.execute(create_label_with_name, label, id)
+                                    label_id = res_query.scalar() 
+                                conn.execute(insert_link , fiche_id, label_id)
+                                
                 except Exception as e: 
                     print(f'the exception is {e}')
 
