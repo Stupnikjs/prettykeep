@@ -33,3 +33,28 @@ class Fiche(Base):
 
     def __str__(self):
         return self.to_dict()
+
+
+
+
+class Label(Base):
+
+    __tablename__='labels'
+
+    id = Column(Integer,primary_key=True)
+    
+
+    def to_dict(self):
+        return {
+        'id':self.id,
+        'title':self.title, 
+        'text' : self.text,
+        'created' : self.created,
+        'updated': self.updated,
+        'labels': self.labels,
+        'complete_start': self.complete_start,
+        'complete_end': self.complete_end
+        }
+
+    def __str__(self):
+        return self.to_dict()
