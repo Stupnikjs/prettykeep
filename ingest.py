@@ -8,14 +8,12 @@ from db.query import insert_new_fiche, select_label_with_name, create_label_with
 import traceback
 
 parser = argparse.ArgumentParser()
-
 parser.add_argument('-p', '--path', required=True, help='Specify the path')
-
 arg = parser.parse_args()
 
 
-uri = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
 
+uri = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
 engine = create_engine(uri, pool_size=4, max_overflow=2)
 
 
@@ -56,37 +54,30 @@ def extract_gkeep(arg):
                     if data is None: 
                         continue
                     with engine.connect() as conn:
-                        data = {
-                            'title': data['textContent'],
-                            'text': data['title'],
+                        insert = {
+                            'title': data['title'],
+                            'text': data['textContent'],
                             'created': today,
                             'updated': None,
                             'complete_start': 0,
                             'complete_end':0
                         
                         }
-                        res = conn.execute(text(insert_new_fiche), data)
+                        res = conn.execute(text(insert_new_fiche), insert)
                         fiche_id = res.scalar()
-                        if 'label' in data:
+                        print(fiche_id)
+                        if 'labels' in data:
                             for label in data['labels']:
-                                    label = conn.execute(text(select_label_with_name), label) 
-                                    if label == None:
-                                        res_query  = conn.execute(text(create_label_with_name), label, id)
-                                        label_id = res_query.scalar() 
-                                    conn.execute(text(insert_link) , fiche_id, label_id)
+                                res_query  = conn.execute(text(create_label_with_name), {"name":label, "hot": False})
+                                label_id = res_query.scalar() 
+                                conn.execute(text(insert_link) , {"fiche_id": fiche_id, "label_id":label_id})
                         conn.commit()
-                except Exception as e: 
+                except: 
                      traceback.print_exc()              
 
 extract_gkeep(arg.path)
 
-with engine.connect() as conn:
-    result = conn.execute(text('SELECT * FROM fiches')).fetchall()
-    for row in result:
-        print(row)
-    result = conn.execute(text('SELECT * FROM link')).fetchall()
-    for row in result:
-        print(row)
+
 
 
 
