@@ -3,7 +3,7 @@ from server import app, engine
 from flask import render_template, request
 from datetime import datetime
 from sqlalchemy import text
-from db.query import select_fiche_by_id, update_fiche_query
+from db.query import select_fiche_by_id, update_fiche_query, select_all_labels
 from utils import special_decoder
 
 
@@ -25,7 +25,12 @@ def get_fiche_by_id(id):
             return_obj['complete_end'] = fiche[5]
             return render_template("fiche.html", fiche=return_obj)
 
-
+# afficher la fiche 
+@app.route('/labels/all')
+def all_labels():
+    with engine.connect() as conn:
+        labels = conn.execute(text(select_all_labels)).fetchall()
+        return render_template('labels.html', labels=labels)
 
 # mettre a jour la fiche 
 @app.route('/updatefiche/<int:id>', methods=['POST'])

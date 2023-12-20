@@ -44,3 +44,8 @@ WHERE f.fiche_id = :id;
 update_fiche_query = """
 
 """
+
+select_all_labels = """
+SELECT l.name, l.hot 
+FROM labels l 
+"""

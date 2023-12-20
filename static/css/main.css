@@ -90,3 +90,15 @@ textarea{
     min-width: 4rem;
     
 }
+
+
+.label_container{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.label_card{
+    padding: 1rem;
+    background-color: lightblue;
+    border: 1px solid gray;
+}
