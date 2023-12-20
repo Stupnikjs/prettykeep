@@ -10,6 +10,8 @@ from utils import special_decoder
 # afficher la fiche 
 @app.route('/fiche/<int:id>')
 def get_fiche_by_id(id):
+    json_request = request.get_json()
+    to_updated = json_request['updated']
     
     with engine.connect() as conn:
         fiche = conn.execute(text(select_fiche_by_id), {"id": id }).first()
