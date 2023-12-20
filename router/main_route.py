@@ -1,19 +1,29 @@
 import base64
 from server import app, engine
 from flask import render_template, request
-from sqlalchemy.orm import Session,joinedload
-from orm import Fiche
 from datetime import datetime
-
+from sqlalchemy import text
+from db.query import select_fiche_by_id, update_fiche_query
+from utils import special_decoder
 
 
 # afficher la fiche 
 @app.route('/fiche/<int:id>')
-def test(id):
-    with Session(engine) as session:
-        fiche = session.query(Fiche).get(id)
-        print(fiche.to_dict())
-        return render_template('fiche.html', fiche=fiche)
+def get_fiche_by_id(id):
+    
+    with engine.connect() as conn:
+        fiche = conn.execute(text(select_fiche_by_id), {"id": id }).first()
+        if fiche[1]: 
+            newtext = special_decoder(fiche[1])
+            print(newtext)
+            return_obj = {}
+            return_obj['title'] = fiche[0]
+            return_obj['text'] = newtext
+            return_obj['created'] = fiche[2]
+            return_obj['updated'] = fiche[3]
+            return_obj['complete_start'] = fiche[4]
+            return_obj['complete_end'] = fiche[5]
+            return render_template("fiche.html", fiche=return_obj)
 
 
 
@@ -22,12 +32,15 @@ def test(id):
 def update_fiche(id):
     # with sql conn
     today = datetime.now().strftime("%d-%m-%Y %H:%M")
+    # champ update dans l'objet qui correspond aux champs a update 
     updated_fiche = request.get_json()['fiche']
     # gérer erreur dans le json 
     updated_fiche['updated'] = today
     
-    with Session(engine) as session: 
-        fiche = session.query(Fiche).get(id)
+    with engine.connect() as conn: 
+        fiche = conn.execute(text(update_fiche_query))
+        return fiche.first()
+        """
         fiche = Fiche(
          title=updated_fiche['title'],
          text=updated_fiche['text'],
@@ -37,10 +50,11 @@ def update_fiche(id):
          complete_start=updated_fiche['complete_start'],
          complete_end=updated_fiche['complete_end']
         )
-        return fiche.to_dict()
+        """
+    
     # sql request 
    
-
+"""
 # tous les labels 
 @app.route('/withlabel/<string:label>')
 def get_fiche_with_label(label):
@@ -54,6 +68,8 @@ def get_fiche_with_label(label):
             return_fiches.append(fiche.to_dict())
         print(return_fiches)
         return render_template("bylabel.html", fiches=return_fiches)
+
+
     
 
  
@@ -71,3 +87,4 @@ def delete_fiche(id):
     return render_template('fiche.html', fiche=fiche.to_dict())
 
 
+"""

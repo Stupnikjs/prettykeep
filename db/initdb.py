@@ -6,7 +6,7 @@ create_fiches_table_query = """
 CREATE TABLE IF NOT EXISTS fiches ( 
     fiche_id SERIAL PRIMARY KEY, 
     title VARCHAR(20000), 
-    text VARCHAR(20000), 
+    text text, 
     created VARCHAR(20), 
     updated VARCHAR(20), 
     complete_start INTEGER, 

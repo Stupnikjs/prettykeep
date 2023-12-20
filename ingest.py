@@ -7,6 +7,7 @@ from sqlalchemy import create_engine, text
 from db.query import insert_new_fiche, select_label_with_name, create_label_with_name, insert_link
 import traceback
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path', required=True, help='Specify the path')
 arg = parser.parse_args()
@@ -35,7 +36,8 @@ def load_json(file):
         print(e)
         return None
         
-    
+
+
 
 def extract_gkeep(arg):
     if arg.endswith('.zip'):    

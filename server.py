@@ -3,14 +3,11 @@ from datetime import datetime
 from app import create_app
 from sqlalchemy import create_engine
 
-# from script import relevant
-
-
 
 app = create_app()
 
 from router import *
-from orm import Base 
+
 
 
 
@@ -24,13 +21,12 @@ if port == "":
 if 'DB_URI' in os.environ: 
     uri=os.environ['DB_URI']
 else: 
-    uri='postgresql://mavkwomw:AcfRavZm6hKU42I0rDRzYcruMuFtI8D6@horton.db.elephantsql.com/mavkwomw'
+    uri = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
 
 
 
 engine = create_engine(uri, pool_size=4, max_overflow=2)
 
-Base.metadata.create_all(engine, checkfirst=True)
 
 today = datetime.now().strftime("%d-%m-%Y %H:%M")
 

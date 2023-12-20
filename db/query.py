@@ -32,3 +32,15 @@ select_fiche_by_label  = """
    WHERE la.name = :label;
    
 """
+
+
+select_fiche_by_id = """
+SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end 
+FROM fiches f 
+WHERE f.fiche_id = :id; 
+"""
+
+
+update_fiche_query = """
+
+"""
