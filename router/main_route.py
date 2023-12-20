@@ -39,10 +39,11 @@ def all_labels():
 def update_fiche(id):
     # with sql conn
     today = datetime.now().strftime("%d-%m-%Y %H:%M")
-    # champ update dans l'objet qui correspond aux champs a update 
-    updated_fiche = request.get_json()['fiche']
+    # champ update dans l'objet qui correspond  
+    with engine.connect() as conn:
+       updated_fiche = request.get_json()['fiche']
     # gérer erreur dans le json 
-    updated_fiche['updated'] = today
+       updated_fiche['updated'] = today
     
     with engine.connect() as conn: 
         fiche = conn.execute(text(update_fiche_query))
