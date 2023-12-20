@@ -83,13 +83,9 @@ def get_fiche_with_label(label):
 @app.route('/deletefiche/<int:id>')
 def delete_fiche(id):
     # with sql conn
-    with Session(engine) as session: 
-        fiche = session.query(Fiche).get(id)
-        session.delete(fiche)
-        session.commit()
-    # sql request 
-    # fiche 
-    return render_template('fiche.html', fiche=fiche.to_dict())
+    with engine.connect() as conn:
+        conn.execute(text(delete_by_id_query))
+        conn.commit()
 
 
 """
