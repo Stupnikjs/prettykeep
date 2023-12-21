@@ -1,39 +1,37 @@
 import os 
-from datetime import datetime 
+from datetime import datetime
+
+from sqlalchemy import create_engine 
 from app import create_app
-from sqlalchemy import create_engine
+from flask import Flask
+from config import DevelopmentConfig
+from router import create_routes
 
-
-blueprint = "fiche_blueprint"
-
-app = create_app(blueprint)
-
-from router import *
-
-app.register
+app = Flask(__name__)
 
 
 
-port = os.environ.get('PORT')
-
-if port == "":
-    port = "5000"
 
 
-
+"""
 if 'DB_URI' in os.environ: 
     uri=os.environ['DB_URI']
 else: 
     uri = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
+"""
 
 
 
-engine = create_engine(uri, pool_size=4, max_overflow=2)
+app = create_app(DevelopmentConfig)
 
+
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+
+create_routes(app, engine)
 
 today = datetime.now().strftime("%d-%m-%Y %H:%M")
 
 # middleware authentification
  
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True, port=port)
+    app.run(host="0.0.0.0", debug=True, port=app.config['PORT'])

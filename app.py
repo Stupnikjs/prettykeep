@@ -1,11 +1,14 @@
 from flask import Flask
+from sqlalchemy import create_engine
+
+from config import Config
 
 
-
-def create_app(blueprint:str):
+def create_app(config_class=Config):
 
     app = Flask(__name__, template_folder="static/templates")
-
-    app.register_blueprint(blueprint=blueprint)
     
+    app.config.from_object(config_class)
+    
+
     return app
