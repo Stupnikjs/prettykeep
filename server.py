@@ -4,10 +4,13 @@ from app import create_app
 from sqlalchemy import create_engine
 
 
-app = create_app()
+blueprint = "fiche_blueprint"
+
+app = create_app(blueprint)
 
 from router import *
 
+app.register
 
 
 

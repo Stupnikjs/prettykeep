@@ -35,10 +35,13 @@ select_fiche_by_label  = """
 
 
 select_fiche_by_id = """
-SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end 
-FROM fiches f 
-WHERE f.fiche_id = :id; 
+SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, la.name 
+ FROM fiches f 
+ LEFT JOIN link l ON f.fiche_id = l.fiche_id
+ LEFT JOIN labels la ON l.label_id = la.label_id
+ WHERE f.fiche_id = :id;
 """
+
 
 
 update_fiche_query = """
