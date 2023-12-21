@@ -9,7 +9,8 @@
 <body>
     <div class="label_container">
         {% for label in labels %}
-            <a href='/label/{{label["name"]}}' class="label_card"> {{ label['name'] }}</a>
+            {% set encoded_label = label['name']|urlsafe_b64encode %}
+            <a href='/label/{{ encoded_label }}' class="label_card"> {{ label['name'] }}</a>
         {% endfor %}
     </div>
     

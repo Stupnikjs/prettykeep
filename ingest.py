@@ -70,9 +70,15 @@ def extract_gkeep(arg):
                         print(fiche_id)
                         if 'labels' in data:
                             for label in data['labels']:
-                                res_query  = conn.execute(text(create_label_with_name), {"name":label, "hot": False})
-                                label_id = res_query.scalar() 
-                                conn.execute(text(insert_link) , {"fiche_id": fiche_id, "label_id":label_id})
+                                res_search = conn.execute(text(select_label_with_name), {'name': label}).first()
+                                
+                                if res_search is None:
+                                    res_query  = conn.execute(text(create_label_with_name), {"name":label, "hot": False})
+                                    label_id = res_query.scalar()
+                                    conn.execute(text(insert_link) , {"fiche_id": fiche_id, "label_id":label_id})
+                                else: 
+                                    label_id = res_search[1]
+                                    conn.execute(text(insert_link) , {"fiche_id": fiche_id, "label_id":label_id})
                         conn.commit()
                 except: 
                      traceback.print_exc()              

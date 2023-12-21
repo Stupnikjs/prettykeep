@@ -2,7 +2,7 @@ import base64
 from flask import  render_template, request
 from datetime import datetime
 from sqlalchemy import text
-from db.query import select_fiche_by_id, update_fiche_query, select_all_labels
+from db.query import select_fiche_by_id, update_fiche_query, select_all_labels, select_fiches_by_label, select_light_fiche_by_label
 from utils import special_decoder
 
 
@@ -32,7 +32,8 @@ def create_routes(app, engine):
                 
             return render_template("fiche.html", fiche=return_obj)
 
-    # afficher la fiche 
+     
+        
     @app.route('/labels/all')
     def all_labels():
         with engine.connect() as conn:
@@ -66,21 +67,31 @@ def create_routes(app, engine):
             """
         
         # sql request 
-    
-    """
-    # tous les labels 
-    @app.route('/withlabel/<string:label>')
+     # tous les labels 
+    @app.route('/label/<string:label>')
     def get_fiche_with_label(label):
         # with sql conn
-        decoded_label = base64.urlsafe_b64decode(label)
-        decoded_label = decoded_label[0].upper() + decoded_label[1:]
-        with Session(engine) as session: 
-            fiches = session.query(Fiche).filter_by(labels=decoded_label)
-            return_fiches = []
-            for fiche in fiches:   
-                return_fiches.append(fiche.to_dict())
-            print(return_fiches)
-            return render_template("bylabel.html", fiches=return_fiches)
+        decoded_label = base64.urlsafe_b64decode(label).decode('utf-8')
+        print(decoded_label)
+        with engine.connect() as conn: 
+            fiches = conn.execute(text(select_light_fiche_by_label), {'label':decoded_label}).fetchall()
+            map(process_fiche, fiches)
+            print(fiches)
+            return render_template("bylabel.html", fiches=fiches)
+    
+    
+    
+    def process_fiche(fiche):
+        return_obj = {}
+        return_obj['title'] = fiche[0]
+        return_obj['text'] = fiche[1]
+        return_obj['fiche_id'] = fiche[2]
+        return return_obj
+
+
+    
+    """
+   
 
 
         

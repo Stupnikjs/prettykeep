@@ -28,10 +28,10 @@ class BaseCase(unittest.TestCase):
         create_routes(self.app ,self.engine)
         
         
-    def test_sample(self):
+    def test_base_url(self):
         r = self.client.get('/')
         assert r.status_code == 200, "status code should be 200"
-
+    
     
 
 if __name__ == "__main__":

@@ -6,8 +6,8 @@ RETURNING fiche_id;
 
 
 select_label_with_name = """
-SELECT * FROM labels 
-WHERE name = :name
+SELECT name,label_id  FROM labels 
+WHERE name = :name;
 """
 
 
@@ -24,8 +24,8 @@ VALUES (:fiche_id, :label_id)
 """
 
 
-select_fiche_by_label  = """
-   SELECT f.title, f.text 
+select_light_fiche_by_label  = """
+   SELECT f.title, f.text, f.fiche_id 
    FROM fiches f
    JOIN link l ON f.fiche_id = l.fiche_id
    JOIN labels la ON l.label_id = la.label_id
@@ -41,6 +41,16 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
  LEFT JOIN labels la ON l.label_id = la.label_id
  WHERE f.fiche_id = :id;
 """
+
+
+select_fiches_by_label = """
+SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, la.name 
+ FROM fiches f 
+ LEFT JOIN link l ON f.fiche_id = l.fiche_id
+ LEFT JOIN labels la ON l.label_id = la.label_id
+ WHERE la.name = :label;
+"""
+
 
 
 
