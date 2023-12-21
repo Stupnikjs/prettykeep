@@ -55,7 +55,8 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
 
 
 update_fiche_query = """
-
+UPDATE fiches f
+SET 
 """
 
 select_all_labels = """

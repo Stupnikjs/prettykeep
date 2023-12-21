@@ -19,7 +19,6 @@
 }
 
 .button-div{
-    width: 35%;
     order: 4;
     margin: 2% auto;
 }
@@ -102,3 +101,32 @@ textarea{
     background-color: lightblue;
     border: 1px solid gray;
 }
+
+
+@media (max-width: 900px) {
+    
+    .data-card h2{
+        width: 80%;
+    }
+    .button-div{
+        flex-direction: row;
+    }
+    .button-div button{
+        font-family: "voltaire";
+        padding: .7rem;
+        font-size: .5rem;
+    }
+
+    textarea{
+        font-size: 1rem;
+    }
+    .fiche_link{
+        font-size: 1rem;
+    }
+    
+    
+
+
+
+
+  }
