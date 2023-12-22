@@ -1,5 +1,6 @@
 
 fonction redirect(){
+window.location.replace('/fiche')
 }
 
 const textarea = document.querySelector('.text')
