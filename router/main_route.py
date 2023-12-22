@@ -29,6 +29,7 @@ def create_routes(app, engine):
                 return_obj['complete_start'] = fiche[4]
                 return_obj['complete_end'] = fiche[5]
                 return_obj['labels'] = fiche[6]
+                return_obj['id'] = id
                 
             return render_template("fiche.html", fiche=return_obj)
 
@@ -48,24 +49,13 @@ def create_routes(app, engine):
         # champ update dans l'objet qui correspond  
         with engine.connect() as conn:
             updated_fiche = request.get_json()['fiche']
-            # gérer erreur dans le json 
-            updated_fiche['updated'] = today
+            update_fiche['id'] = id
         
         with engine.connect() as conn: 
-            fiche = conn.execute(text(update_fiche_query))
-            return fiche.first()
-            """
-            fiche = Fiche(
-            title=updated_fiche['title'],
-            text=updated_fiche['text'],
-            labels=updated_fiche['labels'],
-            created=updated_fiche['created'],
-            updated=updated_fiche['updated'], 
-            complete_start=updated_fiche['complete_start'],
-            complete_end=updated_fiche['complete_end']
-            )
-            """
-        
+            conn.execute(text(update_fiche_query), **update_fiche )
+            conn.commit()
+            return update_fiche
+ 
         # sql request 
      # tous les labels 
     @app.route('/label/<string:label>')
