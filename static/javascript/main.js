@@ -1,3 +1,7 @@
+
+fonction redirect(){
+}
+
 const textarea = document.querySelector('.text')
 // select update button 
 
