@@ -1,6 +1,10 @@
 const textarea = document.querySelector('.text')
 // select update button 
 
-const textUpdate = ''
+const updateButton = document.querySelector('.updateButton')
+
+
+
 textarea.addEventListener(e => )
 
+updateButton.addEventListener( e => )
