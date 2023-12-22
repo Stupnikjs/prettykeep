@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" >
+    <script src="{{ url_for('static', filename='javascript/main.js') }}" defer></script>
 </head>
 <body>
         <div class="data-card">
@@ -15,7 +16,7 @@
             </div>
             <h2>{{fiche['title']}}</h2>
             <div class="textarea_container">
-                <textarea  class="text">{{ fiche['text'] }}</textarea>
+                <textarea  class="text" id={{fiche['id']}}>{{ fiche['text'] }}</textarea>
             </div>
         <div>
             <a href="/withlabel/{{fiche['labels']}}" class="fiche_link">{{fiche['labels']}}</a>

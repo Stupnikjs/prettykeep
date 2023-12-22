@@ -20,7 +20,6 @@ def create_routes(app, engine):
             fiche = conn.execute(text(select_fiche_by_id), {"id": id }).first()
             return_obj = {}
             if fiche: 
-                print(fiche)
                 newtext = special_decoder(fiche[1])
                 return_obj['title'] = fiche[0]
                 return_obj['text'] = newtext
@@ -48,13 +47,14 @@ def create_routes(app, engine):
         today = datetime.now().strftime("%d-%m-%Y %H:%M")
         # champ update dans l'objet qui correspond  
         with engine.connect() as conn:
-            updated_fiche = request.get_json()['fiche']
-            update_fiche['id'] = id
+            updated_fiche = request.get_json()['text']
+            print(updated_fiche)
+            updated_fiche['id'] = id
         
         with engine.connect() as conn: 
-            conn.execute(text(update_fiche_query), **update_fiche )
+            conn.execute(text(update_fiche_query), **updated_fiche )
             conn.commit()
-            return update_fiche
+            return updated_fiche
  
         # sql request 
      # tous les labels 
