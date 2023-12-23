@@ -8,9 +8,9 @@
     <script src="{{ url_for('static', filename='javascript/main.js') }}" defer></script>
 </head>
 <body>
-        <div class="data-card">
+        <div class="data-card" data-fiche='{{ fiche | tojson }}'>
             <div class="button-div">
-                <button class="updateButton" onclick="postUpdate()">Update</button>
+                
                 <button class="completionButton">Add Completion</button> 
                 <button class="deleteButton" >Delete</button>  
             </div>

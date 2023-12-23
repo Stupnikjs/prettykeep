@@ -1,20 +1,41 @@
 
-function postUpdate() {
-    // Get the content of the textarea
-    // recuperer tout le contenu de la fiche 
-    // title created updated complete_start complete_end 
+let divButton = document.querySelector('.button-div')
 
+
+
+let updateButton = document.createElement('button')
+updateButton.className = 'updateButton' 
+updateButton.textContent = 'Update'
+
+updateButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    postUpdate()
+})
+divButton.appendChild(updateButton)
+
+
+function postUpdate() {
+    
+    // Get the content of the textarea
+    // Retrieve the data-fiche attribute value
+    var dataFiche = document.querySelector('.data-card').getAttribute('data-fiche');
+    console.log(dataFiche)
+    // Parse the JSON string to get the JavaScript object
+    
+    var ficheObject = JSON.parse(dataFiche);
+    
     let textarea = document.querySelector('textarea')
-    var textareaContent = textarea.value;
-    let id = textarea.id
-    print(textarea)
+    ficheObject['text'] = textarea.value;
+    ficheObject['id'] = textarea.id
+    delete ficheObject['labels']
+    console.log(ficheObject)
     // Prepare the data to be sent in the request body
     var data = {
-        text: textareaContent
+        fiche: ficheObject
     };
     print(data)
     // Send a POST request to the server using the Fetch API
-    fetch(`/updatefiche/${id}`, {
+    fetch(`/updatefiche/${ficheObject['id']}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,4 +56,8 @@ function postUpdate() {
         // Gérez les erreurs ici
         console.error('Error:', error);
     });
+  
 }
+
+
+

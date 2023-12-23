@@ -55,14 +55,14 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
 
 
 update_fiche_query = """
-UPDATE fiches f
-SET f.title = :title , 
-   f.text = :text, 
-   f.created = :created, 
-   f.updated = :updated, 
-   f.complete_start = :complete_start, 
-   f.complete_end = :complete_end 
-WHERE f.fiche_id = :id 
+UPDATE fiches 
+SET title = :title , 
+   text = :text, 
+   created = :created, 
+   updated = :updated, 
+   complete_start = :complete_start, 
+   complete_end = :complete_end 
+WHERE fiche_id = :id ;
    """
 
 select_all_labels = """

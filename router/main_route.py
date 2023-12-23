@@ -43,16 +43,21 @@ def create_routes(app, engine):
     # mettre a jour la fiche 
     @app.route('/updatefiche/<int:id>', methods=['POST'])
     def update_fiche(id):
-        # with sql conn
-        today = datetime.now().strftime("%d-%m-%Y %H:%M")
-        # champ update dans l'objet qui correspond  
-        with engine.connect() as conn:
-            updated_fiche = request.get_json()['text']
-            print(updated_fiche)
-            updated_fiche['id'] = id
         
+        today = datetime.now().strftime("%d-%m-%Y %H:%M")  
+        updated_fiche = request.get_json()['fiche']  
+        updated_fiche['id'] = id
+        print(updated_fiche)
         with engine.connect() as conn: 
-            conn.execute(text(update_fiche_query), **updated_fiche )
+            conn.execute(text(update_fiche_query), {
+                "title": updated_fiche['title'],
+                "text": updated_fiche['text'],
+                "created": updated_fiche['created'],
+                "updated": today,
+                "complete_start": updated_fiche['complete_start'],
+                "complete_end": updated_fiche['complete_end'],
+                "id": updated_fiche['id']
+            } )
             conn.commit()
             return updated_fiche
  
