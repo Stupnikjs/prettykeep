@@ -32,7 +32,10 @@ class BaseCase(unittest.TestCase):
         r = self.client.get('/')
         assert r.status_code == 200, "status code should be 200"
     
-    
+    def test_get_fiche(self): 
+        r = self.client.get('/fiche/3')
+        assert r.status_code == 200, "status code should be 200"
+
 
 if __name__ == "__main__":
     unittest.main()
