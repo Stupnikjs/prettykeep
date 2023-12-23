@@ -26,7 +26,7 @@ class BaseCase(unittest.TestCase):
         self.client = self.app.test_client() 
         self.engine = create_engine(self.app.config['SQLALCHEMY_DATABASE_URI'])
         create_routes(self.app ,self.engine)
-        
+        # CREATE TABLES 
         
     def test_base_url(self):
         r = self.client.get('/')
@@ -48,7 +48,9 @@ class BaseCase(unittest.TestCase):
             conn.commit()
             r = self.client.get('/fiche/3')
             assert r.status_code == 200, "status code should be 200"
+            # DELETE 
             conn.execute(text('DROP '))  
+            
 
 
 if __name__ == "__main__":
