@@ -33,14 +33,22 @@ class BaseCase(unittest.TestCase):
         assert r.status_code == 200, "status code should be 200"
     
     def test_get_fiche(self): 
+        fiche = {
+                "title": "test", 
+                "text" : "test", 
+                "created": "test", 
+                "updated": "test",
+                "complete_start": "test",
+                "complete_end":"test"
+        }            
         with engine.connect() as conn:  
-            conn.execute(text(insert), {
-                
-            }) 
+            conn.execute(text(insert_new_fiche), fiche)
+            conn.execute(text(insert_new_fiche), fiche)
+            conn.execute(text(insert_new_fiche), fiche)
             conn.commit()
             r = self.client.get('/fiche/3')
             assert r.status_code == 200, "status code should be 200"
-            
+            conn.execute(text('DROP '))  
 
 
 if __name__ == "__main__":
