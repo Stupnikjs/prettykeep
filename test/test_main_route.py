@@ -1,7 +1,7 @@
 import unittest
 import requests
 import os
-
+from sqlalchemy import create_engine, text
 import sys
 sys.path.append(os.getcwd())
 
@@ -33,8 +33,14 @@ class BaseCase(unittest.TestCase):
         assert r.status_code == 200, "status code should be 200"
     
     def test_get_fiche(self): 
-        r = self.client.get('/fiche/3')
-        assert r.status_code == 200, "status code should be 200"
+        with engine.connect() as conn:  
+            conn.execute(text(insert), {
+                
+            }) 
+            conn.commit()
+            r = self.client.get('/fiche/3')
+            assert r.status_code == 200, "status code should be 200"
+            
 
 
 if __name__ == "__main__":
