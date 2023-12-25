@@ -86,22 +86,27 @@ def create_routes(app, engine):
     def get_fiche_with_label(label):
         # with sql conn
         decoded_label = base64.urlsafe_b64decode(label).decode('utf-8')
-        print(decoded_label)
+        
         with engine.connect() as conn: 
-            fiches = conn.execute(text(select_light_fiche_by_label), {'label':decoded_label}).fetchall()
-            map(process_fiche, fiches)
+            fiches = conn.execute(text(select_fiches_by_label), {'label':decoded_label}).fetchall()
             print(fiches)
-            return render_template("bylabel.html", fiches=fiches)
+            return_obj_list = []
+            return_obj = {}
+            for fiche in fiches: 
+                newtext = special_decoder(fiche[1])
+                return_obj['title'] = fiche[0]
+                return_obj['text'] = newtext
+                return_obj['created'] = fiche[2]
+                return_obj['updated'] = fiche[3]
+                return_obj['complete_start'] = fiche[4]
+                return_obj['complete_end'] = fiche[5]
+                return_obj['id'] = fiche[6]
+                return_obj_list.append(return_obj)
+            print(return_obj_list)
+            return render_template("bylabel.html", fiches=return_obj_list)
     
     
     
-    def process_fiche(fiche):
-        return_obj = {}
-        return_obj['title'] = fiche[0]
-        return_obj['text'] = fiche[1]
-        return_obj['fiche_id'] = fiche[2]
-        return return_obj
-
 
     
     """

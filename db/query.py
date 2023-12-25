@@ -50,13 +50,14 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
  
 """
 
+# not working returning only one entry multiple time 
 
 select_fiches_by_label = """
-SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, la.name 
+SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, f.fiche_id 
  FROM fiches f 
  LEFT JOIN link l ON f.fiche_id = l.fiche_id
- LEFT JOIN labels la ON l.label_id = la.label_id
- WHERE la.name = :label;
+ LEFT JOIN labels la ON l.label_id = la.label_id;
+
 """
 
 
