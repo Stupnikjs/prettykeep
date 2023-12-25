@@ -9,8 +9,8 @@ from utils import special_decoder
 
 def create_routes(app, engine):
     @app.route('/')
-    def test():
-        return 'hello'
+    def home():
+        return render_template('home.html')
 
     # afficher la fiche 
     @app.route('/fiche/<int:id>')

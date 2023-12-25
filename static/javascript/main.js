@@ -33,7 +33,7 @@ function postUpdate() {
     var data = {
         fiche: ficheObject
     };
-    print(data)
+    
     // Send a POST request to the server using the Fetch API
     fetch(`/updatefiche/${ficheObject['id']}`, {
         method: 'POST',
