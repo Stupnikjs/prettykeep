@@ -42,6 +42,14 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
  WHERE f.fiche_id = :id;
 """
 
+select_all_fiches = """
+SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, la.name 
+ FROM fiches f 
+ LEFT JOIN link l ON f.fiche_id = l.fiche_id
+ LEFT JOIN labels la ON l.label_id = la.label_id;
+ 
+"""
+
 
 select_fiches_by_label = """
 SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, la.name 

@@ -2,7 +2,7 @@ import base64
 from flask import  render_template, request
 from datetime import datetime
 from sqlalchemy import text
-from db.query import select_fiche_by_id, update_fiche_query, select_all_labels, select_fiches_by_label, select_light_fiche_by_label
+from db.query import select_fiche_by_id, update_fiche_query, select_all_labels, select_fiches_by_label, select_light_fiche_by_label, select_all_fiches
 from utils import special_decoder
 
 
@@ -30,9 +30,28 @@ def create_routes(app, engine):
                 return_obj['labels'] = fiche[6]
                 return_obj['id'] = id
                 
-            return render_template("fiche.html", fiche=return_obj)
+            return render_template("fiche_by_id.html", fiche=return_obj)
 
-     
+     # afficher la fiche 
+    @app.route('/allfiches')
+    def get_all_fiches():
+        with engine.connect() as conn:
+            fiches = conn.execute(text(select_all_fiches)).fetchall()
+            return_obj_list = []
+            return_obj = {}
+            for fiche in fiches: 
+                newtext = special_decoder(fiche[1])
+                return_obj['title'] = fiche[0]
+                return_obj['text'] = newtext
+                return_obj['created'] = fiche[2]
+                return_obj['updated'] = fiche[3]
+                return_obj['complete_start'] = fiche[4]
+                return_obj['complete_end'] = fiche[5]
+                return_obj['labels'] = fiche[6]
+                return_obj['id'] = id
+                return_obj_list.append(return_obj)
+                
+            return render_template("fiche_roll.html", fiches=return_obj_list)
         
     @app.route('/labels/all')
     def all_labels():
