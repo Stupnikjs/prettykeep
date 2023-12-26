@@ -132,6 +132,15 @@ textarea{
 }
 
 
+.inactive{
+    display: none;
+}
+
+.active{
+    display: flex;
+}
+
+
 @media (max-width: 900px) {
     
     .data-card h2{

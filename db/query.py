@@ -55,12 +55,17 @@ SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, 
 select_fiches_by_label = """
 SELECT f.title, f.text, f.created, f.updated, f.complete_start, f.complete_end, f.fiche_id 
  FROM fiches f 
- LEFT JOIN link l ON f.fiche_id = l.fiche_id
- LEFT JOIN labels la ON l.label_id = la.label_id;
+  JOIN link l ON f.fiche_id = l.fiche_id
+  JOIN labels la ON l.label_id = la.label_id
+  WHERE la.name = :label
+  ;
 
 """
 
-
+"""
+SELECT f.title, f.text, f.fiche_id , la.name FROM fiches f JOIN link l ON f.fiche_
+ id = l.fiche_id JOIN labels la ON la.label_id = l.label_id WHERE la.name = 'Python' 
+"""
 
 
 update_fiche_query = """

@@ -49,8 +49,7 @@ def create_routes(app, engine):
                 return_obj['complete_end'] = fiche[5]
                 return_obj['labels'] = fiche[6]
                 return_obj['id'] = id
-                return_obj_list.append(return_obj)
-                
+                return_obj_list.append(return_obj)    
             return render_template("fiche_roll.html", fiches=return_obj_list)
         
     @app.route('/labels/all')
@@ -81,18 +80,19 @@ def create_routes(app, engine):
             return updated_fiche
  
         # sql request 
-     # tous les labels 
+     
+    # all fiches with label 
+    #
     @app.route('/label/<string:label>')
-    def get_fiche_with_label(label):
+    def get_fiches_with_label(label):
         # with sql conn
         decoded_label = base64.urlsafe_b64decode(label).decode('utf-8')
         
         with engine.connect() as conn: 
             fiches = conn.execute(text(select_fiches_by_label), {'label':decoded_label}).fetchall()
-            print(fiches)
             return_obj_list = []
-            return_obj = {}
             for fiche in fiches: 
+                return_obj = {}
                 newtext = special_decoder(fiche[1])
                 return_obj['title'] = fiche[0]
                 return_obj['text'] = newtext
@@ -100,9 +100,10 @@ def create_routes(app, engine):
                 return_obj['updated'] = fiche[3]
                 return_obj['complete_start'] = fiche[4]
                 return_obj['complete_end'] = fiche[5]
+                return_obj['label'] = decoded_label
                 return_obj['id'] = fiche[6]
                 return_obj_list.append(return_obj)
-            print(return_obj_list)
+            print("list ok", return_obj_list)
             return render_template("bylabel.html", fiches=return_obj_list)
     
     

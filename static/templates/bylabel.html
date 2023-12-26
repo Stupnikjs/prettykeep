@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='javascript/main.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/bylabel.js') }}" defer></script>
     <title>Document</title>
 </head>
 <body>
     <div class="bylabels_div">
         {% for fiche in fiches %}
-        <div class="data-card" data-fiche='{{ fiche | tojson }}'>
+
+        <div class="data-card {% if loop.index != 1 %}inactive{% endif %}" data-fiche='{{ fiche | tojson }}'>
             <div class="button-div">
                 <button class="completionButton">Add Completion</button> 
                 <button class="deleteButton" >Delete</button>  
@@ -20,7 +22,8 @@
                 <textarea  class="text" id={{fiche['id']}}>{{ fiche['text'] }}</textarea>
             </div>
         <div>
-            <a href="/withlabel/{{fiche['labels']}}" class="fiche_link">{{fiche['labels']}}</a>
+                        {% set encoded_label = fiche['label']|urlsafe_b64encode %}
+            <a href="/withlabel/{{ encoded_label }}" class="fiche_link">{{fiche['label']}}</a>
         </div>
         </div> 
         {% endfor%}
