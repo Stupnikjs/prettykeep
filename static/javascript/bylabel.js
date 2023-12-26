@@ -1,7 +1,7 @@
-/*
-fiches = document.querySelectorAll('.data-card')
 
+let fiches = document.querySelectorAll('.data-card')
 
+let next = document.querySelector('data-card .next')
 
 
 
@@ -19,4 +19,4 @@ for ( let i = 0; i < fiches.length ; i++){
         
 }
 
-*/
+

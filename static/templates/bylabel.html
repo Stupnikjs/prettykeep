@@ -13,6 +13,7 @@
         {% for fiche in fiches %}
 
         <div class="data-card {% if loop.index != 1 %}inactive{% endif %}" data-fiche='{{ fiche | tojson }}'>
+            <button class="next"> >  </button>
             <div class="button-div">
                 <button class="completionButton">Add Completion</button> 
                 <button class="deleteButton" >Delete</button>  

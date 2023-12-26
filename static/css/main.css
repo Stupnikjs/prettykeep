@@ -93,12 +93,12 @@ textarea{
 .fiche_link{
     background-color: aliceblue;
     width: fit-content;
-    padding:1rem;
+    padding: .6rem;
     text-decoration: none;
     color: black;
     margin-left: 2rem;
     border: 2px solid blue;
-    font-size: 2rem;
+    font-size: 1.2rem;
 }
 
 
@@ -140,6 +140,12 @@ textarea{
     display: flex;
 }
 
+.next {
+    padding: 1rem; 
+    background-color: rgb(109, 109, 158);
+    width: 20%;
+    margin: auto;
+}
 
 @media (max-width: 900px) {
     

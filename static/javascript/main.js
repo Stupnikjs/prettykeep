@@ -1,34 +1,44 @@
 
-let divButton = document.querySelector('.button-div')
 
 
 
-let updateButton = document.createElement('button')
-updateButton.className = 'updateButton' 
-updateButton.textContent = 'Update'
+let allCards = document.querySelectorAll('data-card')
 
-updateButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    postUpdate()
-})
-divButton.appendChild(updateButton)
+for ( card of allCards ){
+    let divButton = card.querySelector('.button-div')
+    let updateButton = card.createElement('button')
+    updateButton.className = 'updateButton' 
+    updateButton.textContent = 'Update'
+    
+    updateButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        postUpdate()
+    })
+    divButton.appendChild(updateButton)
+    
+    
+    
+
+
+
+
+}
 
 
 function postUpdate() {
-    
+        
     // Get the content of the textarea
     // Retrieve the data-fiche attribute value
-    var dataFiche = document.querySelector('.data-card').getAttribute('data-fiche');
+    var dataFiche = card.querySelector('.data-card').getAttribute('data-fiche');
     console.log(dataFiche)
     // Parse the JSON string to get the JavaScript object
     
     var ficheObject = JSON.parse(dataFiche);
     
-    let textarea = document.querySelector('textarea')
+    let textarea = card.querySelector('textarea')
     ficheObject['text'] = textarea.value;
     ficheObject['id'] = textarea.id
     delete ficheObject['labels']
-    console.log(ficheObject)
     // Prepare the data to be sent in the request body
     var data = {
         fiche: ficheObject
@@ -58,6 +68,8 @@ function postUpdate() {
     });
   
 }
+
+
 
 
 
