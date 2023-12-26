@@ -8,10 +8,7 @@ from utils import special_decoder
 
 
 def create_routes(app, engine):
-    @app.route('/')
-    def home():
-        return render_template('home.html')
-
+    
     # afficher la fiche 
     @app.route('/fiche/<int:id>')
     def get_fiche_by_id(id):
@@ -52,7 +49,7 @@ def create_routes(app, engine):
                 return_obj_list.append(return_obj)    
             return render_template("fiche_roll.html", fiches=return_obj_list)
         
-    @app.route('/labels/all')
+    @app.route('/')
     def all_labels():
         with engine.connect() as conn:
             labels = conn.execute(text(select_all_labels)).fetchall()

@@ -2,34 +2,28 @@
 
 
 
-let allCards = document.querySelectorAll('data-card')
+let allCards = document.querySelectorAll('.data-card')
+let divButtons = document.querySelectorAll('.button-div')
+console.log(divButtons)
+for( let j = 0; j < allCards.length; j++ ){
 
-for ( card of allCards ){
-    let divButton = card.querySelector('.button-div')
-    let updateButton = card.createElement('button')
+    let updateButton = document.createElement('button')
     updateButton.className = 'updateButton' 
     updateButton.textContent = 'Update'
-    
     updateButton.addEventListener('click', (e) => {
         e.preventDefault()
-        postUpdate()
+        postUpdate(allCards[j], allCards[j].querySelector('textarea').getAttribute('id'))
     })
-    divButton.appendChild(updateButton)
+    divButtons[j].appendChild(updateButton)
     
-    
-    
-
-
-
-
 }
 
 
-function postUpdate() {
+function postUpdate(card, id) {
         
     // Get the content of the textarea
     // Retrieve the data-fiche attribute value
-    var dataFiche = card.querySelector('.data-card').getAttribute('data-fiche');
+    var dataFiche = card.getAttribute('data-fiche');
     console.log(dataFiche)
     // Parse the JSON string to get the JavaScript object
     
@@ -37,7 +31,7 @@ function postUpdate() {
     
     let textarea = card.querySelector('textarea')
     ficheObject['text'] = textarea.value;
-    ficheObject['id'] = textarea.id
+    ficheObject['id'] = textarea.getAttribute('id')
     delete ficheObject['labels']
     // Prepare the data to be sent in the request body
     var data = {
@@ -45,7 +39,7 @@ function postUpdate() {
     };
     
     // Send a POST request to the server using the Fetch API
-    fetch(`/updatefiche/${ficheObject['id']}`, {
+    fetch(`/updatefiche/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
