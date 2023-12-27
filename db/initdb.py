@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, text 
+from sqlalchemy import  text 
 import os 
 
 
@@ -35,22 +35,27 @@ CREATE TABLE IF NOT EXISTS link (
 
 """
 
-if 'DB_URI' in os.environ: 
-    uri=os.environ['DB_URI']
-else: 
-    uri="postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
+def init_tables(testing, engine):
+        
+        with engine.connect() as conn:
+            if testing:
+                conn.execute(text('DROP TABLE fiches CASCADE; DROP TABLE labels CASCADE; DROP TABLE link; '))
+            conn.execute(text(create_fiches_table_query))
+            conn.execute(text(create_labels_table_query))
+            conn.execute(text(create_link_table))
+            conn.commit()
 
-engine = create_engine(uri)
+    
+    
+
+    
 
 
 
 
-with engine.connect() as conn:
-    conn.execute(text('DROP TABLE fiches CASCADE; DROP TABLE labels CASCADE; DROP TABLE link; '))
-    conn.execute(text(create_fiches_table_query))
-    conn.execute(text(create_labels_table_query))
-    conn.execute(text(create_link_table))
-    conn.commit()
+    
+
+
     
 
 

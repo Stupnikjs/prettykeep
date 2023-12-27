@@ -83,3 +83,8 @@ select_all_labels = """
 SELECT l.name, l.hot 
 FROM labels l 
 """
+
+delete_by_id_query = """
+DELETE FROM link WHERE fiche_id = :id;
+DELETE from fiches WHERE fiche_id = :id; 
+"""

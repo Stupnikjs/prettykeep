@@ -2,7 +2,7 @@ import base64
 from flask import  render_template, request
 from datetime import datetime
 from sqlalchemy import text
-from db.query import select_fiche_by_id, update_fiche_query, select_all_labels, select_fiches_by_label, select_light_fiche_by_label, select_all_fiches
+from db.query import select_fiche_by_id, update_fiche_query,delete_by_id_query, select_all_labels, select_fiches_by_label, select_light_fiche_by_label, select_all_fiches
 from utils import special_decoder
 
 
@@ -58,7 +58,7 @@ def create_routes(app, engine):
     # mettre a jour la fiche 
     @app.route('/updatefiche/<int:id>', methods=['POST'])
     def update_fiche(id):
-        
+        # checkpermission 
         today = datetime.now().strftime("%d-%m-%Y %H:%M")  
         updated_fiche = request.get_json()['fiche']  
         updated_fiche['id'] = id
@@ -107,21 +107,19 @@ def create_routes(app, engine):
     
 
     
-    """
+
    
 
 
         
-
-    
-
-    # supprimer la fiche 
     @app.route('/deletefiche/<int:id>')
     def delete_fiche(id):
         # with sql conn
+        # check permission 
         with engine.connect() as conn:
-            conn.execute(text(delete_by_id_query))
+            conn.execute(text(delete_by_id_query), {"id":id})
             conn.commit()
+        return "deleted"
 
 
-    """
+   

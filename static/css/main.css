@@ -127,7 +127,8 @@ textarea{
 
 }
 .label_card{
-    padding: 1rem;
+    width: 10%;
+    gap:1vh; 
     background-color: lightblue;
     border: 1px solid gray;
 }

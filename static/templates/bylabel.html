@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script src="{{ url_for('static', filename='javascript/main.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/deleteUpdate.js') }}" defer></script>
     <script src="{{ url_for('static', filename='javascript/bylabel.js') }}" defer></script>
     <title>Document</title>
 </head>
@@ -19,8 +19,7 @@
             </div>
             
             <div class="button-div">
-                <button class="completionButton">Add Completion</button> 
-                <button class="deleteButton" >Delete</button>  
+                <button class="completionButton">Add Completion</button>  
             </div>
             <h2>{{fiche['title']}}</h2>
             <div class="textarea_container">

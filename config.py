@@ -8,6 +8,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    TESTING = False
     PORT = os.environ.get('PORT', '5000')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DB_URI', "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap")
 class TestingConfig(Config):
