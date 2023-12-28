@@ -117,7 +117,7 @@ def create_routes(app, engine):
         # with sql conn
         # check permission 
         with engine.connect() as conn:
-            conn.execute(text(delete_by_id_query), {"id":id})
+            conn.execute(text(delete_by_id_query), {"id"})
             conn.commit()
         return "deleted"
 

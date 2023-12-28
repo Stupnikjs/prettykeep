@@ -1,11 +1,11 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import unittest
+from sqlalchemy import create_engine, text
+
 from db.initdb import init_tables
 from db.query import insert_new_fiche
-import os
-from sqlalchemy import create_engine, text
-import sys
-sys.path.append(os.getcwd())
-
 from sqlalchemy import create_engine
 
 from config import TestingConfig
@@ -28,7 +28,7 @@ class BaseCase(unittest.TestCase):
         self.engine = create_engine(self.app.config['SQLALCHEMY_DATABASE_URI'])
         create_routes(self.app ,self.engine)
         init_tables(TestingConfig.TESTING, engine=self.engine)
-        # CREATE TABLES 
+        
         
     def test_base_url(self):
         r = self.client.get('/')
@@ -40,8 +40,8 @@ class BaseCase(unittest.TestCase):
                 "text" : "test", 
                 "created": "test", 
                 "updated": "test",
-                "complete_start": "test",
-                "complete_end":"test"
+                "complete_start": 0,
+                "complete_end": 0,
         }            
         with self.engine.connect() as conn:  
             conn.execute(text(insert_new_fiche), fiche)
@@ -51,7 +51,7 @@ class BaseCase(unittest.TestCase):
             r = self.client.get('/fiche/3')
             assert r.status_code == 200, "status code should be 200"
             # DELETE 
-            conn.execute(text('TRUCATE TABLE fiches; '))
+            conn.execute(text('TRUNCATE TABLE fiches CASCADE; '))
             conn.commit() 
              
             

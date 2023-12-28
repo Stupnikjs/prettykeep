@@ -36,10 +36,13 @@ CREATE TABLE IF NOT EXISTS link (
 """
 
 def init_tables(testing, engine):
-        
+        print(testing)
         with engine.connect() as conn:
+            """
             if testing:
                 conn.execute(text('DROP TABLE fiches CASCADE; DROP TABLE labels CASCADE; DROP TABLE link; '))
+            """
+
             conn.execute(text(create_fiches_table_query))
             conn.execute(text(create_labels_table_query))
             conn.execute(text(create_link_table))
