@@ -10,18 +10,6 @@ from router import create_routes
 app = Flask(__name__)
 
 
-
-
-
-"""
-if 'DB_URI' in os.environ: 
-    uri=os.environ['DB_URI']
-else: 
-    uri = "postgresql://vxxssqap:nX4LrcOIo9uQ1OQtPpXHm6PEm5MC_lDx@horton.db.elephantsql.com/vxxssqap"
-"""
-
-
-
 app = create_app(DevelopmentConfig)
 
 

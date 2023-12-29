@@ -26,8 +26,10 @@ def create_routes(app, engine):
                 return_obj['complete_end'] = fiche[5]
                 return_obj['labels'] = fiche[6]
                 return_obj['id'] = id
-                
-            return render_template("fiche_by_id.html", fiche=return_obj)
+                return render_template("fiche_by_id.html", fiche=return_obj)
+            else:
+                error_msg = "id not found"
+                return render_template("error.html", error=error_msg)
 
      # afficher la fiche 
     @app.route('/allfiches')
@@ -62,7 +64,6 @@ def create_routes(app, engine):
         today = datetime.now().strftime("%d-%m-%Y %H:%M")  
         updated_fiche = request.get_json()['fiche']  
         updated_fiche['id'] = id
-        print(updated_fiche)
         with engine.connect() as conn: 
             conn.execute(text(update_fiche_query), {
                 "title": updated_fiche['title'],
@@ -100,7 +101,6 @@ def create_routes(app, engine):
                 return_obj['label'] = decoded_label
                 return_obj['id'] = fiche[6]
                 return_obj_list.append(return_obj)
-            print("list ok", return_obj_list)
             return render_template("bylabel.html", fiches=return_obj_list)
     
     
@@ -115,9 +115,11 @@ def create_routes(app, engine):
     @app.route('/deletefiche/<int:id>')
     def delete_fiche(id):
         # with sql conn
-        # check permission 
+        # check permission
+         
         with engine.connect() as conn:
-            conn.execute(text(delete_by_id_query), {"id"})
+            res = conn.execute(text(delete_by_id_query), {"id":id})
+            print("result of delete query" , res)
             conn.commit()
         return "deleted"
 

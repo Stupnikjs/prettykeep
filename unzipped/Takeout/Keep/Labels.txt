@@ -23,6 +23,7 @@ CloudRun
 Scikit-learn
 Flask
 Google Cloud
+Algorithme
 Bash
 RegExp
 Algèbre Linéaire

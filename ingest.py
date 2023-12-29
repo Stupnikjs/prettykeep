@@ -4,7 +4,7 @@ import os
 import json
 import argparse
 from sqlalchemy import create_engine, text
-from db.query import insert_new_fiche, select_label_with_name, create_label_with_name, insert_link
+from db.query import insert_new_fiche, select_label_with_name, insert_label_with_name, insert_link
 import traceback
 
 
@@ -73,7 +73,7 @@ def extract_gkeep(arg):
                                 res_search = conn.execute(text(select_label_with_name), {'name': label}).first()
                                 
                                 if res_search is None:
-                                    res_query  = conn.execute(text(create_label_with_name), {"name":label, "hot": False})
+                                    res_query  = conn.execute(text(insert_label_with_name), {"name":label, "hot": False})
                                     label_id = res_query.scalar()
                                     conn.execute(text(insert_link) , {"fiche_id": fiche_id, "label_id":label_id})
                                 else: 

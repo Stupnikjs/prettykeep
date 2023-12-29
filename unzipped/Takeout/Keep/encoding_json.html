@@ -267,12 +267,14 @@ hr {
 }
 
       </style></head>
-<body><div class="note"><div class="heading"><div class="meta-icons">
+<body><div class="note DEFAULT"><div class="heading"><div class="meta-icons">
 
 </div>
 4 mars 2023, 15:14:54</div>
 <div class="title">encoding/json</div>
 <div class="content">err := json.NewDecoder(r.Body).Decode(&amp;req)<br><br><br>resp := User{ <br>       ID: 123,<br>       Name: req.Name,<br>       Email:req.Email,<br>       }<br><br>err := json.NewEncoder(w).Encode(resp)<br><br>err := json.Unmarshal(byte, pointer) <br>byte,err := json.Marshall(any)</div>
-
+<div class="chips">
+<span class="chip label"><span class="label-name">Golang</span>
+</span></div>
 
 </div></body></html>

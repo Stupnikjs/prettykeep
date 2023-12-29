@@ -273,6 +273,8 @@ hr {
 29 nov. 2023, 19:26:50</div>
 <div class="title">Sql no orm </div>
 <div class="content">import sqlalchemy as db<br><br>engine = db.create_engine(&#39;sqlite:///datacamp.sqlite&#39;)<br>conn = engine.connect()<br>metadata = db.MetaData()<br><br>Student = db.Table(&#39;Student&#39;, metadata,<br>              db.Column(&#39;Id&#39;, db.Integer(),primary_key=True),<br>              db.Column(&#39;Name&#39;, db.String(255), nullable=False),<br>              db.Column(&#39;Major&#39;, db.String(255), default=&quot;Math&quot;),<br>              db.Column(&#39;Pass&#39;, db.Boolean(), default=True)<br>              )<br><br>metadata.create_all(engine) </div>
-
+<div class="chips">
+<span class="chip label"><span class="label-name">SqlAlchemy</span>
+</span></div>
 
 </div></body></html>

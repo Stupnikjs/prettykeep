@@ -11,7 +11,7 @@ WHERE name = :name;
 """
 
 
-create_label_with_name = """
+insert_label_with_name = """
 INSERT INTO labels (name, hot) 
 VALUES (:name, :hot)
 RETURNING label_id
