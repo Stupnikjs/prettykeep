@@ -13,6 +13,7 @@
         {% for fiche in fiches %}
 
         <div class="data-card {% if loop.index != 1 %}inactive{% endif %}" data-fiche='{{ fiche | tojson }}'>
+            <a href="/"> Back </>
             <div class="pass">
                 <button class="previous"> <  </button>
                 <button class="next"> >  </button>
